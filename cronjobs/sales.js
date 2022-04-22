@@ -6,20 +6,24 @@ const { openseaEventsUrl } = require('../config.json');
 var salesCache = [];
 var lastTimestamp = null;
 
-module.exports = function createSalesBot(channel_id, slug) {
+module.exports = function createSalesBot(channel_id, slug, ms) {
   return {
     name: 'sales',
     description: 'sales bot',
     interval: 30000,
     enabled: channel_id != null,
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
+
     async execute(client) {
       if (lastTimestamp == null) {
         lastTimestamp = Math.floor(Date.now() / 1000) - 120;
       } else {
         lastTimestamp -= 30;
       }
-      let newTimestamp = Math.floor(Date.now() / 1000) - 30;
-      console.log(newTimestamp);
+      let newTimestamp = Math.floor(Date.now() / 1000) - 31260;
+      console.log('sales for ' + slug + ' at time ' + newTimestamp);
       let next = null;
       let newEvents = true;
       let settings = {
@@ -30,6 +34,7 @@ module.exports = function createSalesBot(channel_id, slug) {
       };
       do {
         let url = `${ openseaEventsUrl }?collection_slug=${ slug }&event_type=successful&only_opensea=false&occurred_before=${ newTimestamp }${ next == null ? '' : `&cursor=${ next }` }`;
+
         try {
           var res = await fetch(url, settings);
           if (res.status != 200) {
@@ -37,6 +42,8 @@ module.exports = function createSalesBot(channel_id, slug) {
           }
 
           let data = await res.json();
+
+
 
           next = data.next;
 
