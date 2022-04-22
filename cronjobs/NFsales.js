@@ -9,7 +9,7 @@ module.exports = {
   name: 'sales',
   description: 'sales bot',
   interval: 30000,
-  enabled: process.env.DISCORD_SALES_CHANNEL_ID != null,
+  enabled: process.env.NF_ID != null,
   async execute(client) {
     if (lastTimestamp == null) {
       lastTimestamp = Math.floor(Date.now() / 1000) - 120;
@@ -27,11 +27,12 @@ module.exports = {
       }
     };
     do {
-      let url = `${openseaEventsUrl}?collection_slug=${process.env.OPEN_SEA_COLLECTION_NAME}&event_type=successful&only_opensea=false&occurred_before=${newTimestamp}${next == null ? '' : `&cursor=${next}`}`;
+
+      let url = `${ openseaEventsUrl }?collection_slug=${ process.env.COLLECTION_SLUG_NF }&event_type=successful&only_opensea=false&occurred_before=${ newTimestamp }${ next == null ? '' : `&cursor=${ next }` }`;
       try {
         var res = await fetch(url, settings);
         if (res.status != 200) {
-          throw new Error(`Couldn't retrieve events: ${res.statusText}`);
+          throw new Error(`Couldn't retrieve events: ${ res.statusText }`);
         }
 
         let data = await res.json();
@@ -57,12 +58,12 @@ module.exports = {
               .setColor('#0099ff')
               .setTitle(event.asset.name)
               .setURL(event.asset.permalink)
-              .setDescription(`has just been sold for ${event.total_price / (1e18)}\u039E`)
+              .setDescription(`has just been sold for ${ event.total_price / (1e18) }\u039E`)
               .setThumbnail(event.asset.image_url)
-              .addField("From", `[${event.seller.user?.username || event.seller.address.slice(0, 8)}](https://etherscan.io/address/${event.seller.address})`, true)
-              .addField("To", `[${event.winner_account.user?.username || event.winner_account.address.slice(0, 8)}](https://etherscan.io/address/${event.winner_account.address})`, true);
+              .addField("From", `[${ event.seller.user?.username || event.seller.address.slice(0, 8) }](https://etherscan.io/address/${ event.seller.address })`, true)
+              .addField("To", `[${ event.winner_account.user?.username || event.winner_account.address.slice(0, 8) }](https://etherscan.io/address/${ event.winner_account.address })`, true);
 
-            client.channels.fetch(process.env.DISCORD_SALES_CHANNEL_ID)
+            client.channels.fetch(process.env.NF_ID)
               .then(channel => {
                 channel.send(embedMsg);
               })
