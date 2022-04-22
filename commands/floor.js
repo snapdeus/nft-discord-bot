@@ -7,8 +7,8 @@ const ttl = 60; //cache for 60 seconds;
 const cache = new CacheService(ttl);
 
 const fetchFloor = async () => {
-  let url = `https://api.opensea.io/api/v1/collection/${ process.env.OPEN_SEA_COLLECTION_NAME }/stats`
-  let settings = {
+  let url = `https://api.opensea.io/api/v1/collection/${process.env.OPEN_SEA_COLLECTION_NAME}/stats`
+  let settings = { 
     method: "GET",
     headers: process.env.OPEN_SEA_API_KEY == null ? {} : {
       "X-API-KEY": process.env.OPEN_SEA_API_KEY
@@ -16,11 +16,13 @@ const fetchFloor = async () => {
   };
 
   let res = await fetch(url, settings);
-  if (res.status == 404 || res.status == 400) {
+  if (res.status == 404 || res.status == 400)
+  {
     throw new Error("Error retrieving collection stats.");
   }
-  if (res.status != 200) {
-    throw new Error(`Couldn't retrieve metadata: ${ res.statusText }`);
+  if (res.status != 200)
+  {
+    throw new Error(`Couldn't retrieve metadata: ${res.statusText}`);
   }
 
   let data = await res.json();
@@ -29,12 +31,12 @@ const fetchFloor = async () => {
 }
 
 module.exports = {
-  name: "floor",
-  execute(message) {
+	name: "floor",
+	execute(message) {
     cache.get("FloorPrice", fetchFloor)
       .then((floorPrice) => {
-        message.channel.send(`The current floor price is ${ floorPrice.toFixed(3) }Ξ`);
+        message.channel.send(`The current floor price is ${floorPrice.toFixed(3)}Ξ`);
       })
       .catch(error => message.channel.send(error.message));
-  },
+	},
 };
