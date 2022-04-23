@@ -6,7 +6,7 @@ const { openseaEventsUrl } = require('../config.json');
 var salesCache = [];
 var lastTimestamp = null;
 
-module.exports = function createSalesBot(channel_id, slug, ms) {
+module.exports = function createSalesBot(channel_id, slug,) {
   return {
     name: 'sales',
     description: 'sales bot',
@@ -83,6 +83,7 @@ module.exports = function createSalesBot(channel_id, slug, ms) {
           console.error(error);
           return;
         }
+
       } while (next != null && newEvents)
 
       lastTimestamp = newTimestamp;

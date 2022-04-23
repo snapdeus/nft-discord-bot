@@ -9,9 +9,12 @@ const Discord = require('discord.js');
 
 const createSalesBot = require('./cronjobs/sales')
 const createListingsBot = require('./cronjobs/listing')
+
+const createTokenCommands = require('./commands/token')
+
 const projectConfigs = [
   { id: process.env.FIM_ID, slug: process.env.COLLECTION_SLUG_FIM, },
-  { id: process.env.IOUS_ID, slug: process.env.COLLECTION_SLUG_IOUS, },
+  { id: process.env.IOUS_ID, slug: process.env.COLLECTION_SLUG_IOUS },
   { id: process.env.CGK_ID, slug: process.env.COLLECTION_SLUG_CGK, },
   { id: process.env.ISID_ID, slug: process.env.COLLECTION_SLUG_ISID, },
   { id: process.env.COSJ_ID, slug: process.env.COLLECTION_SLUG_COSJ, },
@@ -19,10 +22,24 @@ const projectConfigs = [
   { id: process.env.NVC_ID, slug: process.env.COLLECTION_SLUG_NVC, },
 ];
 
+const tokenCommandsConfig = [
+  { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_IOU, contractAddress: process.env.CONTRACT_ADDRESS_IOUS },
+  { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_NF, contractAddress: process.env.CONTRACT_ADDRESS_NF },
+  { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_COSJ, contractAddress: process.env.CONTRACT_ADDRESS_COSJ },
+  { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_NVC, contractAddress: process.env.CONTRACT_ADDRESS_NVC },
+  { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_ISID, contractAddress: process.env.CONTRACT_ADDRESS_AB },
+  { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_CGK, contractAddress: process.env.CONTRACT_ADDRESS_AB },
+  { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_FIM, contractAddress: process.env.CONTRACT_ADDRESS_AB },
+];
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 // client.salesJobs = projectConfigs.map(config => createSalesBot(config.id, config.slug))
+
+// const tokenCommands = tokenCommandsConfig.map(config => createTokenCommands(config.tokenCommand, config.contractAddress))
+// for (const command of tokenCommands) {
+//   client.commands.set(command.name, command);
+// }
 
 
 const salesJobs = projectConfigs.map(config => createSalesBot(config.id, config.slug))
@@ -62,7 +79,7 @@ client.on('ready', () => {
   console.log(`Logged in as ${ client.user.tag }`);
   client.jobs.forEach((job, i) => {
     setTimeout(() => {
-      setInterval(() => job.execute(client), 30000)
+      setInterval(() => job.execute(client), job.interval)
     }, i * 5000
     )
   })
