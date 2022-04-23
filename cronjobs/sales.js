@@ -22,7 +22,7 @@ module.exports = function createSalesBot(channel_id, slug,) {
       } else {
         lastTimestamp -= 30;
       }
-      let newTimestamp = Math.floor(Date.now() / 1000) - 31260;
+      let newTimestamp = Math.floor(Date.now() / 1000) - 30
       console.log('sales for ' + slug + ' at time ' + newTimestamp);
       let next = null;
       let newEvents = true;

@@ -97,19 +97,17 @@ module.exports = {
       return message.channel.send(`Token id must be a number!`);
     }
 
+    let tokenNumber = parseInt(args[1])
+
     if (args[0].toLowerCase() === 'cgk') {
-      args[1] = '44000' + args[1]
+      args[1] = (44000000 + tokenNumber)
     } else if (args[0].toLowerCase() === 'fim') {
-      args[1] = '152000' + args[1]
+      args[1] = (152000000 + tokenNumber)
     } else if (args[0].toLowerCase() === 'isid') {
-      if (parseInt(args[1]) > 999) {
-        args[1] = '10200' + args[1]
-      } else {
-        args[1] = '102000' + args[1]
-      }
+      args[1] = (102000000 + tokenNumber)
     }
 
-
+    console.log(tokenNumber, args)
     let url = `${ openseaAssetUrl }/${ contractAddress }/${ args[1] }`;
     let settings = {
       method: "GET",
