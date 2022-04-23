@@ -80,7 +80,7 @@ client.on('ready', () => {
   client.jobs.forEach((job, i) => {
     setTimeout(() => {
       setInterval(() => job.execute(client), job.interval)
-    }, i * 5000
+    }, i * 6000
     )
   })
 })
