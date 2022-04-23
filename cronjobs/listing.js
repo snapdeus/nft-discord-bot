@@ -11,7 +11,7 @@ module.exports = function createListingsBot(channel_id, slug) {
   return {
     name: 'listing',
     description: 'listing bot',
-    interval: 31000,
+    interval: 40000,
     enabled: channel_id != null,
     async execute(client) {
       if (lastTimestamp == null) {
