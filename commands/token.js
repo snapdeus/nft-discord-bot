@@ -107,7 +107,7 @@ module.exports = {
       args[1] = (102000000 + tokenNumber)
     }
 
-    console.log(tokenNumber, args)
+
     let url = `${ openseaAssetUrl }/${ contractAddress }/${ args[1] }`;
     let settings = {
       method: "GET",
