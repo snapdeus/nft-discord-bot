@@ -87,7 +87,7 @@ module.exports = {
       case 'ious':
         contractAddress = process.env.CONTRACT_ADDRESS_IOUS
         break
-      case 'cosj':
+      case 'sjp':
         contractAddress = process.env.CONTRACT_ADDRESS_COSJ
         break
 
@@ -105,6 +105,12 @@ module.exports = {
       args[1] = (152000000 + tokenNumber)
     } else if (args[0].toLowerCase() === 'isid') {
       args[1] = (102000000 + tokenNumber)
+    } else if (args[0].toLowerCase() === 'sjp' && args[1].length < 5) {
+      args[1] = (
+        (0x7C23C1B7E544E3E805BA675C811E287FC9D7194900000000000000n + BigInt(args[1]))
+        * 16n ** 10n
+        + 1n
+      ).toString()
     }
 
 
