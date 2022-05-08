@@ -61,7 +61,7 @@ module.exports = function createListingsBot(channel_id, slug) {
               }
 
               const embedMsg = new Discord.MessageEmbed()
-                .setColor('#0099ff')
+                .setColor('#6e1501')
                 .setTitle(event.asset.name)
                 .setURL(event.asset.permalink)
                 .setDescription(`has just been listed for ${ event.starting_price / (1e18) }\u039E`)
