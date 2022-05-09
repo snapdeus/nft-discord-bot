@@ -20,17 +20,19 @@ const projectConfigs = [
   { id: process.env.COSJ_ID, slug: process.env.COLLECTION_SLUG_COSJ, },
   { id: process.env.NF_ID, slug: process.env.COLLECTION_SLUG_NF, },
   { id: process.env.NVC_ID, slug: process.env.COLLECTION_SLUG_NVC, },
+  { id: process.env.UFIM_ID, slug: process.env.COLLECTION_SLUG_UFIM, },
 ];
 
-const tokenCommandsConfig = [
-  { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_IOU, contractAddress: process.env.CONTRACT_ADDRESS_IOUS },
-  { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_NF, contractAddress: process.env.CONTRACT_ADDRESS_NF },
-  { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_COSJ, contractAddress: process.env.CONTRACT_ADDRESS_COSJ },
-  { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_NVC, contractAddress: process.env.CONTRACT_ADDRESS_NVC },
-  { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_ISID, contractAddress: process.env.CONTRACT_ADDRESS_AB },
-  { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_CGK, contractAddress: process.env.CONTRACT_ADDRESS_AB },
-  { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_FIM, contractAddress: process.env.CONTRACT_ADDRESS_AB },
-];
+// const tokenCommandsConfig = [
+//   { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_IOU, contractAddress: process.env.CONTRACT_ADDRESS_IOUS },
+//   { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_NF, contractAddress: process.env.CONTRACT_ADDRESS_NF },
+//   { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_COSJ, contractAddress: process.env.CONTRACT_ADDRESS_COSJ },
+//   { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_NVC, contractAddress: process.env.CONTRACT_ADDRESS_NVC },
+//   { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_ISID, contractAddress: process.env.CONTRACT_ADDRESS_AB },
+//   { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_CGK, contractAddress: process.env.CONTRACT_ADDRESS_AB },
+//   { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_FIM, contractAddress: process.env.CONTRACT_ADDRESS_AB },
+//   { tokenCommand: process.env.DISCORD_TOKEN_COMMAND_UFIM, contractAddress: process.env.CONTRACT_ADDRESS_UFIM },
+// ];
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();

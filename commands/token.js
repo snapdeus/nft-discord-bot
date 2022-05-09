@@ -90,11 +90,18 @@ module.exports = {
       case 'sjp':
         contractAddress = process.env.CONTRACT_ADDRESS_COSJ
         break
+      case 'ufim':
+        contractAddress = process.env.CONTRACT_ADDRESS_UFIM
+        break
 
     }
 
     if (isNaN(parseInt(args[1]))) {
       return message.channel.send(`Token id must be a number!`);
+    }
+
+    if (args[1] < 0) {
+      return message.channel.send('No negative numbers please')
     }
 
     let tokenNumber = parseInt(args[1])
