@@ -46,7 +46,7 @@ module.exports = function createSalesBot(channel_id, slug,) {
 
 
           next = data.next;
-
+          console.log(`queried for ${ slug } sales`)
           data.asset_events.forEach(function (event) {
             if (event.asset) {
               if (salesCache.includes(event.id)) {

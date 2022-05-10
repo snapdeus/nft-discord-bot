@@ -44,7 +44,7 @@ module.exports = function createListingsBot(channel_id, slug) {
           let data = await res.json();
 
           next = data.next;
-
+          console.log(`queried for ${ slug } listings`)
           data.asset_events.forEach(function (event) {
             if (event.asset) {
               if (listingCache.includes(event.id)) {
