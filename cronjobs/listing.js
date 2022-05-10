@@ -11,15 +11,15 @@ module.exports = function createListingsBot(channel_id, slug) {
   return {
     name: 'listing',
     description: 'listing bot',
-    interval: 30000,
+    interval: 34000,
     enabled: channel_id != null,
     async execute(client) {
       if (lastTimestamp == null) {
-        lastTimestamp = Math.floor(Date.now() / 1000) - 120;
+        lastTimestamp = Math.floor(Date.now() / 1000) - 124;
       } else {
-        lastTimestamp -= 30;
+        lastTimestamp -= 34;
       }
-      let newTimestamp = Math.floor(Date.now() / 1000) - 30;
+      let newTimestamp = Math.floor(Date.now() / 1000) - 34;
       // we're retrieving events from -90 to -30 seconds ago each time, and each query overlaps the previous query by 30 seconds
       // doing this to try to resolve some intermittent issues with events being missed by the bot, suspect it's due to OpenSea api being slow to update the events data
       // duplicate events are filtered out by the listingCache array
