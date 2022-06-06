@@ -93,6 +93,9 @@ module.exports = {
       case 'ufim':
         contractAddress = process.env.CONTRACT_ADDRESS_UFIM
         break
+      case 'mon':
+        contractAddress = process.env.CONTRACT_ADDRESS_AB
+        break
 
     }
 
@@ -118,8 +121,9 @@ module.exports = {
         * 16n ** 10n
         + 1n
       ).toString()
+    } else if (args[0].toLowerCase() === 'mon') {
+      args[1] = (316000000 + tokenNumber)
     }
-
 
     let url = `${ openseaAssetUrl }/${ contractAddress }/${ args[1] }`;
     let settings = {

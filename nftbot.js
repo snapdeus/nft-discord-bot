@@ -21,6 +21,7 @@ const projectConfigs = [
   // { id: process.env.NF_ID, slug: process.env.COLLECTION_SLUG_NF, },
   // { id: process.env.NVC_ID, slug: process.env.COLLECTION_SLUG_NVC, },
   { id: process.env.UFIM_ID, slug: process.env.COLLECTION_SLUG_UFIM, },
+  { id: process.env.MON_ID, slug: process.env.COLLECTION_SLUG_MON, }
 ];
 
 
