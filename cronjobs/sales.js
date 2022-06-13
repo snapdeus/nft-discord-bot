@@ -80,7 +80,7 @@ module.exports = function createSalesBot(channel_id, slug,) {
           });
         }
         catch (error) {
-          console.error(error);
+          console.error(new Date().toLocaleString(), slug, error);
           return;
         }
 

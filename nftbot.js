@@ -20,7 +20,7 @@ const projectConfigs = [
   // { id: process.env.COSJ_ID, slug: process.env.COLLECTION_SLUG_COSJ, },
   // { id: process.env.NF_ID, slug: process.env.COLLECTION_SLUG_NF, },
   // { id: process.env.NVC_ID, slug: process.env.COLLECTION_SLUG_NVC, },
-  { id: process.env.UFIM_ID, slug: process.env.COLLECTION_SLUG_UFIM, },
+  // { id: process.env.UFIM_ID, slug: process.env.COLLECTION_SLUG_UFIM, },
   { id: process.env.MON_ID, slug: process.env.COLLECTION_SLUG_MON, }
 ];
 
@@ -36,6 +36,7 @@ client.commands = new Discord.Collection();
 const salesJobs = projectConfigs.map(config => createSalesBot(config.id, config.slug))
 const listingsJobs = projectConfigs.map(config => createListingsBot(config.id, config.slug))
 client.jobs = salesJobs.concat(listingsJobs)
+
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
@@ -71,7 +72,7 @@ client.on('message', msg => {
   try {
     command.execute(msg, args);
   } catch (error) {
-    console.error(error);
+    console.error(new Date().toLocaleString(), error);
     msg.reply('there was an error trying to execute that command!');
   }
 })
